@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DES — Ustanova za profesionalnu rehabilitaciju i zapošljavanje</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-dark:  #05152e;
+  --blue-mid:   #0a2347;
+  --blue-card:  #0d2b57;
+  --accent:     #0f6fff;
+  --accent2:    #00aaff;
+  --text:       #e8f2ff;
+  --muted:      #6e93be;
+  --border:     rgba(255,255,255,0.08);
+  --radius:     12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--blue-dark); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+header { position: fixed; top: 0; left: 0; right: 0; z-index: 999; height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(5,21,46,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.logo img { height: 40px; width: auto; display: block; }
+nav { display: flex; align-items: center; gap: 6px; }
+nav a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 7px 14px; border-radius: 8px; transition: all 0.2s; }
+nav a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.nav-btn { background: var(--accent) !important; color: #fff !important; margin-left: 8px; font-weight: 600 !important; }
+.nav-btn:hover { background: var(--accent2) !important; }
+
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; padding: 100px 5% 60px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 60% at 20% 50%, rgba(15,111,255,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 20%, rgba(0,170,255,0.07) 0%, transparent 60%); }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; }
+.hero-left { position: relative; z-index: 1; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(15,111,255,0.15); border: 1px solid rgba(15,111,255,0.3); color: #5ba3ff; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
+.hero-eyebrow::before { content: ''; width: 5px; height: 5px; background: #00aaff; border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.hero h1 { font-size: clamp(2rem, 3.8vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards; }
+.hero h1 em { font-style: normal; background: linear-gradient(90deg, #4d8fff, #00c6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-desc { font-size: 1rem; color: var(--muted); max-width: 460px; line-height: 1.75; margin-bottom: 36px; opacity: 0; animation: fadeUp 0.6s ease 0.3s forwards; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s ease 0.4s forwards; }
+.btn-primary { background: var(--accent); color: #fff; padding: 12px 28px; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; box-shadow: 0 4px 20px rgba(15,111,255,0.35); }
+.btn-primary:hover { background: #2d80ff; transform: translateY(-1px); }
+.btn-ghost { color: var(--muted); padding: 12px 24px; border-radius: var(--radius); text-decoration: none; font-weight: 500; font-size: 0.9rem; border: 1px solid var(--border); transition: all 0.2s; }
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+.hero-right { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; opacity: 0; animation: fadeRight 0.8s ease 0.4s forwards; }
+.stat-box { background: var(--blue-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; transition: border-color 0.25s, transform 0.25s; }
+.stat-box:hover { border-color: rgba(15,111,255,0.35); transform: translateY(-3px); }
+.stat-box.wide { grid-column: span 2; display: flex; align-items: center; gap: 20px; background: linear-gradient(135deg, rgba(15,111,255,0.2), rgba(0,170,255,0.08)); border-color: rgba(15,111,255,0.3); }
+.stat-num { font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; background: linear-gradient(90deg, #4d8fff, #00c6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4px; }
+.stat-label { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+.stat-icon { width: 48px; height: 48px; flex-shrink: 0; background: rgba(15,111,255,0.15); border: 1px solid rgba(15,111,255,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeRight { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
+
+section { padding: 80px 5%; }
+.sec-label { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5ba3ff; margin-bottom: 12px; }
+.sec-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 12px; }
+.sec-sub { color: var(--muted); font-size: 0.95rem; max-width: 520px; line-height: 1.7; margin-bottom: 48px; }
+hr.div { border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--border) 15%, var(--border) 85%, transparent); margin: 0 5%; }
+
+.about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.about-cards { display: flex; flex-direction: column; gap: 12px; }
+.about-card { display: flex; align-items: flex-start; gap: 16px; background: var(--blue-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; transition: all 0.25s; }
+.about-card:hover { border-color: rgba(15,111,255,0.3); transform: translateX(5px); }
+.about-icon { width: 38px; height: 38px; flex-shrink: 0; background: rgba(15,111,255,0.12); border: 1px solid rgba(15,111,255,0.2); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; }
+.about-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+.about-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+.quote-block { margin-top: 28px; border-left: 3px solid var(--accent); padding: 18px 22px; background: rgba(15,111,255,0.06); border-radius: 0 var(--radius) var(--radius) 0; }
+.quote-block p { font-size: 1rem; font-style: italic; color: var(--muted); line-height: 1.7; }
+.quote-block p strong { color: var(--text); font-style: normal; }
+
+.services-bg { background: var(--blue-mid); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.service-card { background: var(--blue-dark); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 26px 36px; position: relative; overflow: hidden; transition: all 0.3s; }
+.service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.service-card:hover { border-color: rgba(15,111,255,0.25); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 18px; display: block; }
+.service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+.service-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+.service-img { font-size: 2rem; display: block; margin-bottom: 16px; }
+
+.contact-wrap { display: grid; grid-template-columns: 5fr 4fr; gap: 48px; align-items: start; }
+.contact-items { display: flex; flex-direction: column; gap: 10px; }
+.contact-item { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: var(--blue-card); border: 1px solid var(--border); border-radius: var(--radius); transition: all 0.2s; }
+.contact-item:hover { border-color: rgba(15,111,255,0.3); transform: translateX(4px); }
+.c-icon { width: 38px; height: 38px; flex-shrink: 0; background: rgba(15,111,255,0.12); border: 1px solid rgba(15,111,255,0.2); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; }
+.c-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.c-value { font-size: 0.9rem; font-weight: 500; }
+.contact-cta { background: linear-gradient(145deg, rgba(15,111,255,0.15), rgba(0,170,255,0.07)); border: 1px solid rgba(15,111,255,0.25); border-radius: 16px; padding: 36px 32px; }
+.contact-cta h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; }
+.contact-cta p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+
+footer { background: #030e1f; border-top: 1px solid var(--border); padding: 28px 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+.footer-logo img { height: 30px; }
+.footer-copy { font-size: 0.78rem; color: var(--muted); }
+.footer-nav { display: flex; gap: 20px; }
+.footer-nav a { font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-nav a:hover { color: var(--text); }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding-top: 110px; gap: 40px; }
+  .about-wrap, .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  header { padding: 0 4%; }
+  section { padding: 60px 4%; }
+  .hero { padding: 90px 4% 50px; }
+  .services-grid { grid-template-columns: 1fr; }
+  nav a:not(.nav-btn) { display: none; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo-des.png" alt="DES logo">
+  </div>
+  <nav>
+    <a href="#o-nama">O nama</a>
+    <a href="#djelatnosti">Djelatnosti</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="#kontakt" class="nav-btn">Pišite nam</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Split, Hrvatska · Osnovan 1950.</div>
+    <h1>Ustanova za <em>profesionalnu rehabilitaciju</em> i zapošljavanje</h1>
+    <p class="hero-desc">DES pruža stručnu podršku, edukaciju i zapošljavanje osoba s invaliditetom. Više od 70 godina gradimo mostove između ljudi i dostojanstvenog rada.</p>
+    <div class="hero-actions">
+      <a href="#djelatnosti" class="btn-primary">Naše djelatnosti</a>
+      <a href="#o-nama" class="btn-ghost">Saznajte više</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-box wide">
+      <div class="stat-icon">🏛️</div>
+      <div>
+        <div class="stat-num">70+</div>
+        <div class="stat-label">godina iskustva u profesionalnoj rehabilitaciji i zapošljavanju osoba s invaliditetom</div>
+      </div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">posvećenost inkluziji i jednakim pravima</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">Split</div>
+      <div class="stat-label">sjedište ustanove, Dalmacija, Hrvatska</div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section id="o-nama">
+  <div class="about-wrap">
+    <div>
+      <span class="sec-label">O nama</span>
+      <h2 class="sec-title">Više od sedam desetljeća u službi ljudi</h2>
+      <p class="sec-sub">DES je jedna od najstarijih i najiskusnijih ustanova za profesionalnu rehabilitaciju u Hrvatskoj, s dugogodišnjom tradicijom rada i brige za osobe s invaliditetom.</p>
+      <div class="quote-block">
+        <p>Vjerujemo da <strong>svaka osoba ima pravo na rad i dostojanstven život</strong>. Naša je misija stvoriti okruženje u kojemu svaki čovjek može razviti svoje potencijale i biti punopravni član zajednice.</p>
+      </div>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-icon">🎯</div>
+        <div><h3>Misija</h3><p>Osnaživanje osoba s invaliditetom kroz rad, edukaciju i aktivnu društvenu uključenost.</p></div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🔭</div>
+        <div><h3>Vizija</h3><p>Društvo jednakih prilika u kojemu svaka osoba može ostvariti puni potencijal.</p></div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🤝</div>
+        <div><h3>Vrijednosti</h3><p>Dostojanstvo, inkluzija, stručnost i posvećenost svakom pojedincu kojeg podržavamo.</p></div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">📜</div>
+        <div><h3>Tradicija</h3><p>Više od 70 godina iskustva u profesionalnoj rehabilitaciji i zapošljavanju.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section id="djelatnosti" class="services-bg">
+  <span class="sec-label">Djelatnosti</span>
+  <h2 class="sec-title">Što nudimo</h2>
+  <p class="sec-sub">Pružamo sveobuhvatnu podršku kroz tri ključna područja djelovanja, s ciljem dostojanstvenog i ispunjenog života svakog korisnika.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-num">01 — DJELATNOST</span>
+      <span class="service-img">🏭</span>
+      <h3>Proizvodnja</h3>
+      <p>Kvalitetni proizvodi i usluge u različitim proizvodnim sektorima. Naši zaposlenici s ponosom i stručnošću stvaraju vrijednost za zajednicu.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02 — DJELATNOST</span>
+      <span class="service-img">🤝</span>
+      <h3>Profesionalna rehabilitacija</h3>
+      <p>Individualizirani programi stručne podrške i profesionalne rehabilitacije, prilagođeni potrebama i mogućnostima svakog korisnika.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03 — DJELATNOST</span>
+      <span class="service-img">📚</span>
+      <h3>Edukacija i osposobljavanje</h3>
+      <p>Programi osposobljavanja, radionice i cjeloživotno učenje koji otvaraju nova vrata i pružaju konkretne vještine za tržište rada.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section id="kontakt">
+  <div class="contact-wrap">
+    <div>
+      <span class="sec-label">Kontakt</span>
+      <h2 class="sec-title">Javite nam se</h2>
+      <p class="sec-sub">Stojimo na raspolaganju za sva vaša pitanja — bilo da ste korisnik, partner ili institucija.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="c-icon">📍</div>
+          <div><div class="c-label">Adresa</div><div class="c-value">Split, Hrvatska</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">✉️</div>
+          <div><div class="c-label">Email</div><div class="c-value">info@des.hr</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">📞</div>
+          <div><div class="c-label">Telefon</div><div class="c-value">+385 XX XXX XXX</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">🕐</div>
+          <div><div class="c-label">Radno vrijeme</div><div class="c-value">Pon – Pet, 8:00 – 16:00</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-cta">
+      <h3>Imate pitanje?</h3>
+      <p>Naš stručni tim rado će odgovoriti na vaša pitanja i uputiti vas prema pravoj usluzi ili programu koji vam treba.</p>
+      <a href="mailto:info@des.hr" class="btn-primary">Pošaljite email →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="logo-des.png" alt="DES"></div>
+  <div class="footer-copy">© 2026 Ustanova DES — Sva prava pridržana</div>
+  <nav class="footer-nav">
+    <a href="#o-nama">O nama</a>
+    <a href="#djelatnosti">Djelatnosti</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+</footer>
+
+</body>
+</html>
